@@ -2,18 +2,14 @@ class Solution:
     def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
         
         
-        if len(mat)*len(mat[0])!=r*c:
-            return mat
-        
+        matrix=[]
+        one_row=[]
+        for i in mat:
+            for j in i:
+                one_row.append(j)
+        if r*c == len(one_row):
+            for i in range(0,len(one_row),c):
+                matrix.append(one_row[i:i+c])
+            return matrix
         else:
-            res=[[0 for i in range(c)]for j in range(r)] 
-
-            lst=[item for sublist in mat for item in sublist ]
-
-            lst=lst[::-1]
-            for i in range(r):
-                for j in range(c):
-                    res[i][j]=lst.pop()
-
-
-            return(res)
+            return mat
