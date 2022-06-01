@@ -1,17 +1,18 @@
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         
-        
-        
-        res=[[1]]
-        for i in range(2,numRows+1):
-            
-            one_row=[1]
-            for j in range(1,i-1):
-                print(i,j)
-                one_row.append(res[i-2][j-1]+res[i-2][j])
-            one_row.append(1)
-            
-            res.append(one_row)
-        
-        return(res)
+        triangle = []
+
+        for row_num in range(numRows):
+            # The first and last row elements are always 1.
+            row = [None for _ in range(row_num + 1)]
+            row[0], row[-1] = 1, 1
+
+            # Each triangle element is equal to the sum of the elements
+            # above-and-to-the-left and above-and-to-the-right.
+            for j in range(1, len(row) - 1):
+                row[j] = triangle[row_num - 1][j - 1] + triangle[row_num - 1][j]
+
+            triangle.append(row)
+
+        return triangle
