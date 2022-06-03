@@ -4,16 +4,10 @@ class Solution(object):
         :type matrix: List[List[int]]
         :type target: int
         :rtype: bool
-        """
-        
-        
+        """    
         for i in range(len(matrix)):
-            #print(matrix[i][0])
             if matrix[i][-1]>=target:
-
                 for j in range(len(matrix[0])):
-             #       print(matrix[i-1][j])
                     if matrix[i][j]==target:
                         return True
-                    
         return False
