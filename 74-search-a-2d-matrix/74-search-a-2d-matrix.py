@@ -15,7 +15,7 @@ class Solution(object):
                     return True
                 for j in range(len(matrix[0])):
              #       print(matrix[i-1][j])
-                    if  matrix[i][j]==target:
+                    if matrix[i][j]==target:
                         return True
                     
         return False
