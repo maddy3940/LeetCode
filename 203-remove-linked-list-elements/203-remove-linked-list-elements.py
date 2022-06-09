@@ -17,10 +17,10 @@ class Solution:
 
             if head.val==val:
                 prev.next=head.next
-                head=head.next
+                
             else:
                 prev=head
-                head=head.next
+            head=head.next
 
         return copy.next
 
