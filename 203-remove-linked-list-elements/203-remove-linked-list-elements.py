@@ -8,18 +8,10 @@ class Solution:
         
         
         
-        # if head.next=None:
-        #     if head.val=val:
-        #         return
-        #     else:
-        #         return head
-            
-        if head:
-            prev=ListNode()
-            prev.next=head
-            copy=prev
-        else:
-            return
+
+        prev=ListNode()
+        prev.next=head
+        copy=prev
         
         while head!=None:
 
