@@ -8,3 +8,5 @@ class Solution:
             
             
         return (sorted([i for i in res.keys()]))
+    
+    # return sorted(set.intersection(*map(set, nums)))
