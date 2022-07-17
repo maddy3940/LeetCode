@@ -23,14 +23,14 @@
 
 
 
-with t as (
-  select '[0-5>' as bin, 0 as min_duration, 300 as max_duration union
-  select '[5-10>', 300, 600 union
-  select '[10-15>', 600, 900 union
-  select '15 or more', 900, null
-)
-select t.bin, sum(s.duration is not null) as total 
-from t left join Sessions s on t.min_duration <= s.duration and (t.max_duration is null or s.duration < t.max_duration)
-group by t.bin
-;
-
+SELECT '[0-5>' AS 'bin', SUM(duration/60 < 5) AS 'total'
+FROM Sessions
+UNION
+SELECT '[5-10>' AS 'bin', SUM(duration/60 >= 5 AND duration/60 < 10) AS 'total'
+FROM Sessions
+UNION
+SELECT '[10-15>' AS 'bin', SUM(duration/60 >= 10 AND duration/60 < 15) AS 'total'
+FROM Sessions
+UNION
+SELECT '15 or more' AS 'bin', SUM(duration/60 >= 15) AS 'total'
+FROM Sessions
