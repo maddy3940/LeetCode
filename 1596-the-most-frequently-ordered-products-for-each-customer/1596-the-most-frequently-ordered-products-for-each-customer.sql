@@ -1,10 +1,10 @@
 # Write your MySQL query statement below
 
-with v1 as(
-select customer_id,product_id, count(*) as ct from orders group by 1,2),
-v2 as(
-select customer_id,product_id,rank() over(partition by customer_id order by ct desc) as rn from v1)
-select a.customer_id,a.product_id,p.product_name from v2 a,products p where a.rn=1 and p.product_id=a.product_id
+# with v1 as(
+# select customer_id,product_id, count(*) as ct from orders group by 1,2),
+# v2 as(
+# select customer_id,product_id,rank() over(partition by customer_id order by ct desc) as rn from v1)
+# select a.customer_id,a.product_id,p.product_name from v2 a,products p where a.rn=1 and p.product_id=a.product_id
 
 
 
@@ -20,4 +20,15 @@ select a.customer_id,a.product_id,p.product_name from v2 a,products p where a.rn
 # WHERE rnk = 1 
 # ORDER BY customer_id, product_id
 
+WITH cte AS (
+SELECT customer_id, product_id, COUNT(product_id) as cnt
+FROM Orders 
+GROUP BY 1,2 )
 
+                SELECT a.customer_id, a.product_id, p.product_name
+                FROM cte a
+                JOIN Products p USING (product_id)
+                WHERE cnt IN (
+                            SELECT MAX(cnt)
+                            FROM cte b
+                            WHERE a.customer_id=b.customer_id )
