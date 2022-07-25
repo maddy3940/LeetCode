@@ -1,16 +1,16 @@
 class Solution:
     def canConstruct(self, ransomNote: str, magazine: str) -> bool:
         
-        count=[]
         
-        count1=collections.Counter(magazine)
+        a = Counter(ransomNote)
+        b = Counter(magazine) 
         
-        print(count1)
-        for i in ransomNote:
-            
-            if count1[i]<1:
+        print(a)
+        print(b)
+        
+        for k,v in a.items():
+            if b[k]<v:
                 return False
-            
-            count1[i]=count1[i]-1
-            
+        
         return True
+            
