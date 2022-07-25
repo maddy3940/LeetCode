@@ -1,15 +1,22 @@
 class Solution:
     def firstUniqChar(self, s: str) -> int:
-
-        """
-        :type s: str
-        :rtype: int
-        """
-        # build hash map : character and how often it appears
-        count = collections.Counter(s)
         
-        # find the index
-        for idx, ch in enumerate(s):
-            if count[ch] == 1:
-                return idx     
+        h1={}
+        h2={}
+        
+        for i in range(len(s)):
+            h1[s[i]]=i
+            h2[s[i]]=h2.get(s[i],0)+1
+        
+        
+        for k,v in h2.items():
+            if v==1:
+                return h1[k]
+            
         return -1
+        
+        
+        
+        
+        
+        
