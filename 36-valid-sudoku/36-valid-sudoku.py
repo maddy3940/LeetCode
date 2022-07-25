@@ -1,5 +1,5 @@
-class Solution(object):
-    def isValidSudoku(self, board):
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
         N = 9
 
         # Use hash set to record the status
@@ -26,7 +26,6 @@ class Solution(object):
 
                 # Check the box
                 idx = (r // 3) * 3 + c // 3
-                print(idx)
                 if val in boxes[idx]:
                     return False
                 boxes[idx].add(val)
