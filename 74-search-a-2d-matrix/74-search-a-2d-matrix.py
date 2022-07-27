@@ -13,11 +13,24 @@ class Solution:
         if row==-1:
             return False
         else:
-            for i in range(len(matrix[0])):
-                if matrix[row][i]==target:
-                    return True
+            one_row=matrix[row]
+            
+            left=0
+            right=len(one_row)-1
+            
+            while left<=right:
+                pivot=(left+right)//2
                 
-            return False
+                if one_row[pivot]==target:
+                    return True
+                elif target<one_row[pivot]:
+                    right=pivot-1
+                else:
+                    left=pivot+1
+                
+            
+            
+            
             
             
         
