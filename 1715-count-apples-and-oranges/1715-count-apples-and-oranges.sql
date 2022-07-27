@@ -1,8 +1,10 @@
 # Write your MySQL query statement below
 
 
-select sum(apple_count + b_apple_count) as apple_count, sum(orange_count+b_orange_count) as orange_count from(
-select a.apple_count,a.orange_count, ifnull(b.apple_count,0) as b_apple_count, ifnull(b.orange_count,0) as b_orange_count from boxes a left join chests b on a.chest_id=b.chest_id)a
+SELECT SUM(b.apple_count + IFNULL(c.apple_count,0)) AS apple_count,SUM(b.orange_count + IFNULL(c.orange_count,0)) AS orange_count
+FROM Boxes AS b
+LEFT JOIN Chests AS c
+USING(chest_id)
 
 
 
