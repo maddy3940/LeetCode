@@ -5,23 +5,53 @@
 #         self.next = next
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        l1=list1
-        l2=list2
-        # maintain an unchanging reference to node ahead of the return node.
-        prehead = ListNode(-1)
-
-        prev = prehead
-        while l1 and l2:
-            if l1.val <= l2.val:
-                prev.next = l1
-                l1 = l1.next
+        
+        if list1 is None:
+            return list2
+        elif list2 is None:
+            return list1
+        if list1.val<list2.val:
+            merged=ListNode(val=list1.val)
+            list1=list1.next
+        else:
+            merged=ListNode(val=list2.val)
+            list2=list2.next
+        
+        head=merged
+        while list1 is not None and list2 is not None:
+            
+            if list1.val<list2.val:
+                t_node=ListNode(list1.val)
+                merged.next=t_node
+                merged=merged.next
+                list1=list1.next
+                
             else:
-                prev.next = l2
-                l2 = l2.next            
-            prev = prev.next
+                t_node=ListNode(list2.val)
+                merged.next=t_node
+                merged=merged.next
+                list2=list2.next
+                
+        if list1 is None:
+            while list2:
+                t_node=ListNode(list2.val)
+                merged.next=t_node
+                list2=list2.next
+                merged=merged.next
+        else:
+            while list1:
+                t_node=ListNode(list1.val)
+                merged.next=t_node
+                list1=list1.next
+                merged=merged.next
 
-        # At least one of l1 and l2 can still have nodes at this point, so connect
-        # the non-null list to the end of the merged list.
-        prev.next = l1 if l1 is not None else l2
-
-        return prehead.next
+        
+        return head
+        
+        
+        
+        
+        
+        
+        
+        
