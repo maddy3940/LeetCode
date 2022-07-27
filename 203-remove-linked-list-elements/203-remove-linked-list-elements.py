@@ -7,22 +7,27 @@ class Solution:
     def removeElements(self, head: Optional[ListNode], val: int) -> Optional[ListNode]:
         
         
+        prehead=ListNode(-1)
+        prev=prehead
         
-
-        prev=ListNode()
-        prev.next=head
-        copy=prev
-        
-        while head!=None:
+        while head is not None:
 
             if head.val==val:
-                prev.next=head.next
+                while head is not None and head.val==val:
+                    head=head.next
+            
+            prev.next=head
+            prev=prev.next
+            if head is not None:
+                head=head.next
                 
-            else:
-                prev=head
-            head=head.next
-
-        return copy.next
-
+        return prehead.next
             
             
+            
+            
+            
+            
+        
+        
+        
